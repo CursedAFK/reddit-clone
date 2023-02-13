@@ -1,15 +1,19 @@
-import ChakraWrapper from './components/ChakraWrapper'
+import ChakraWrapper from './components/ChakraWrapper/ChakraWrapper'
+import Navbar from './components/Navbar/Navbar'
 
-export default function RootLayout({
-  children
-}: {
+interface Props {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang='en'>
       <head />
       <body>
-        <ChakraWrapper>{children}</ChakraWrapper>
+        <ChakraWrapper>
+          <Navbar />
+          {children}
+        </ChakraWrapper>
       </body>
     </html>
   )
