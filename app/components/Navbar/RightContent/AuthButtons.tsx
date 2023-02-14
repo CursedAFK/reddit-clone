@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { authModalState } from "@/app/atoms/authModalAtom";
-import { Button } from "@chakra-ui/react";
-import { useSetRecoilState } from "recoil";
+import { authModalState } from '@/app/atoms/authModalAtom'
+import { Button } from '@chakra-ui/react'
+import { useSetRecoilState } from 'recoil'
 
 export default function AuthButtons() {
   const setAuthModalState = useSetRecoilState(authModalState)
@@ -10,24 +10,24 @@ export default function AuthButtons() {
   return (
     <>
       <Button
-        variant="outline"
-        height="20px"
-        display={{ base: "none", sm: "flex" }}
-        width={{ base: "70px", md: "110px" }}
+        variant='outline'
+        height='20px'
+        display={{ base: 'none', sm: 'flex' }}
+        width={{ base: '70px', md: '110px' }}
         mr={2}
-        onClick={() => setAuthModalState({open: true, view: 'login'})}
+        onClick={() => setAuthModalState({ open: true, view: 'login' })}
       >
         Log In
       </Button>
       <Button
         height='28px'
-        display={{ base: "none", sm: "flex" }}
-        width={{ base: "70px", md: "110px" }}
+        display={{ base: 'none', sm: 'flex' }}
+        width={{ base: '70px', md: '110px' }}
         mr={2}
-        onClick={() => setAuthModalState({open: true, view: 'signup'})}  
+        onClick={() => setAuthModalState({ open: true, view: 'signup' })}
       >
         Sign Up
       </Button>
     </>
-  );
+  )
 }
