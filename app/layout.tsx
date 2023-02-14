@@ -1,20 +1,23 @@
-import ChakraWrapper from './components/ChakraWrapper/ChakraWrapper'
-import Navbar from './components/Navbar/Navbar'
+import ChakraWrapper from "./components/ChakraWrapper/ChakraWrapper";
+import Navbar from "./components/Navbar/Navbar";
+import RecoilWrapper from "./components/RecoilWrapper/RecoilWrapper";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head />
       <body>
-        <ChakraWrapper>
-          <Navbar />
-          {children}
-        </ChakraWrapper>
+        <RecoilWrapper>
+          <ChakraWrapper>
+            <Navbar />
+            {children}
+          </ChakraWrapper>
+        </RecoilWrapper>
       </body>
     </html>
-  )
+  );
 }
