@@ -17,16 +17,24 @@ import { CgProfile } from 'react-icons/cg'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { MdOutlineLogin } from 'react-icons/md'
 import { auth } from '@/app/firebase/clientApp'
-import { useSetRecoilState } from 'recoil'
+import { useResetRecoilState, useSetRecoilState } from 'recoil'
 import { authModalState } from '@/app/atoms/authModalAtom'
 import { IoSparkles } from 'react-icons/io5'
+import { communityState } from '@/app/atoms/communitiesAtom'
 
 interface Props {
   user?: User | null
 }
 
 export default function UserMenu({ user }: Props) {
+  const resetCommunityState = useResetRecoilState(communityState)
+
   const setAuthModalState = useSetRecoilState(authModalState)
+
+  async function logout() {
+    await signOut(auth)
+    resetCommunityState()
+  }
 
   return (
     <Menu>
@@ -87,7 +95,7 @@ export default function UserMenu({ user }: Props) {
               fontSize='10pt'
               fontWeight={700}
               _hover={{ bg: 'blue.500', color: 'white' }}
-              onClick={() => signOut(auth)}
+              onClick={() => logout()}
             >
               <Flex align='center'>
                 <Icon as={MdOutlineLogin} fontSize={20} mr={2} />
