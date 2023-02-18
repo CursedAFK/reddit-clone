@@ -25,7 +25,7 @@ import {
   serverTimestamp,
   setDoc
 } from 'firebase/firestore'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { BsEyeFill, BsFillPersonFill } from 'react-icons/bs'
 import { HiLockClosed } from 'react-icons/hi'

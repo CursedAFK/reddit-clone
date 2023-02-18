@@ -2,7 +2,7 @@
 
 import { authModalState } from '@/app/atoms/authModalAtom'
 import { auth } from '@/app/firebase/clientApp'
-import { Button, Flex, Icon, Input } from '@chakra-ui/react'
+import { Flex, Icon, Input } from '@chakra-ui/react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { BsLink45Deg } from 'react-icons/bs'
