@@ -7,7 +7,7 @@ export interface Community {
   createdAt?: Timestamp
   numberOfMembers: number
   privacyType: 'public' | 'private' | 'restricted'
-  imageUrl?: string
+  imageURL?: string
 }
 
 export interface CommunitySnippet {

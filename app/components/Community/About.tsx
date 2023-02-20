@@ -10,16 +10,15 @@ import {
   Flex,
   Icon,
   Image,
-  Stack,
-  Text,
+  Input,
   Spinner,
-  Input
+  Stack,
+  Text
 } from '@chakra-ui/react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadString } from 'firebase/storage'
 import moment from 'moment'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { FaReddit } from 'react-icons/fa'
@@ -35,8 +34,6 @@ const About = (props: Props) => {
   const [uploadingImage, setUploadingImage] = useState(false)
 
   const selectedFileRef = useRef<HTMLInputElement>(null)
-
-  const pathname = usePathname()
 
   const [user] = useAuthState(auth)
 
@@ -67,7 +64,7 @@ const About = (props: Props) => {
         ...prev,
         currentCommunity: {
           ...prev.currentCommunity,
-          imageUrl: downloadURL
+          imageURL: downloadURL
         } as Community
       }))
     } catch (error) {
@@ -129,7 +126,7 @@ const About = (props: Props) => {
               </Text>
             )}
           </Flex>
-          <Link href={`${pathname}/submit`}>
+          <Link href={`r/${props.communityData.id}}/submit`}>
             <Button mt={3} height='30px' width={'100%'}>
               Create Post
             </Button>
@@ -150,9 +147,9 @@ const About = (props: Props) => {
                   >
                     Change Image
                   </Text>
-                  {props.communityData.imageUrl || selectedFile ? (
+                  {props.communityData.imageURL || selectedFile ? (
                     <Image
-                      src={selectedFile || props.communityData.imageUrl}
+                      src={selectedFile || props.communityData.imageURL}
                       borderRadius={'full'}
                       boxSize={'40px'}
                       alt='community-image'
