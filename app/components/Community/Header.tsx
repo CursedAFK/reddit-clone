@@ -1,9 +1,11 @@
 'use client'
 
-import { Community } from '@/app/atoms/communitiesAtom'
+import { Community, communityState } from '@/app/atoms/communitiesAtom'
 import useCommunityData from '@/app/hooks/useCommunityData'
 import { Box, Button, Flex, Icon, Image, Text } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import { FaReddit } from 'react-icons/fa'
+import { useSetRecoilState } from 'recoil'
 
 interface Props {
   communityData: Community
@@ -13,9 +15,18 @@ export default function Header({ communityData }: Props) {
   const { communityStateValue, onJoinOrLeaveCommunity, loading } =
     useCommunityData()
 
+  const setCommunityStateValue = useSetRecoilState(communityState)
+
   const isJoined = !!communityStateValue.mySnippets.find(
     snippet => snippet.communityId === communityData.id
   )
+
+  useEffect(() => {
+    setCommunityStateValue(prev => ({
+      ...prev,
+      currentCommunity: communityData
+    }))
+  }, [])
 
   return (
     <Flex direction={'column'} width={'100%'} height={'146px'}>

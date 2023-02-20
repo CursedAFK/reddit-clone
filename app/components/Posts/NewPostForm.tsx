@@ -1,5 +1,6 @@
 import { Post } from '@/app/atoms/postsAtom'
 import { firestore, storage } from '@/app/firebase/clientApp'
+import useSelectFile from '@/app/hooks/useSelectFile'
 import { Alert, AlertIcon, Flex, Icon, Text } from '@chakra-ui/react'
 import { User } from 'firebase/auth'
 import {
@@ -57,9 +58,10 @@ export default function NewPostForm({ user }: Props) {
     title: '',
     body: ''
   })
-  const [selectedFile, setSelectedFile] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+
+  const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile()
 
   const pathname = usePathname()
   const router = useRouter()
@@ -105,28 +107,14 @@ export default function NewPostForm({ user }: Props) {
           imageURL: downloadURL
         })
       }
+
+      router.back()
     } catch (error: any) {
       console.log('handleCreatePost Error', error.message)
       setError(true)
     }
 
     setLoading(false)
-
-    // router.back()
-  }
-
-  function onSelectImage(event: React.ChangeEvent<HTMLInputElement>) {
-    const reader = new FileReader()
-
-    if (event.target.files?.[0]) {
-      reader.readAsDataURL(event.target.files[0])
-    }
-
-    reader.onload = readerEvent => {
-      if (readerEvent.target?.result) {
-        setSelectedFile(readerEvent.target.result as string)
-      }
-    }
   }
 
   function onTextChange(
@@ -165,7 +153,7 @@ export default function NewPostForm({ user }: Props) {
         {selectedTab === 'Images & Video' && (
           <ImageUpload
             selectedFile={selectedFile}
-            onSelectImage={onSelectImage}
+            onSelectImage={onSelectFile}
             setSelectedTab={setSelectedTab}
             setSelectedFile={setSelectedFile}
           />

@@ -1,7 +1,7 @@
-export default function Loading() {
-  return (
-    <div>
-      <h1>Loading...</h1>
-    </div>
-  )
+type Props = {}
+
+const Loading = (props: Props) => {
+  return <div>Loading...</div>
 }
+
+export default Loading
