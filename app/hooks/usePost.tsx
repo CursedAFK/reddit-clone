@@ -87,6 +87,12 @@ const usePost = () => {
       })
 
       await batch.commit()
+
+      setPostStateValue(prev => ({
+        ...prev,
+        posts: updatedPosts,
+        postVotes: updatedPostVotes
+      }))
     } catch (error) {
       console.log('onVote Error', error)
     }
