@@ -11,10 +11,9 @@ import {
   Text
 } from '@chakra-ui/react'
 import moment from 'moment'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { BsChat, BsDot } from 'react-icons/bs'
-import { FaReddit } from 'react-icons/fa'
+import { BsChat } from 'react-icons/bs'
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -28,7 +27,7 @@ type Props = {
   post: Post
   userIsCreator: boolean
   userVoteValue?: number
-  onVote: () => {}
+  onVote: (post: Post, vote: number, communityId: string) => void
   onDeletePost: (post: Post) => Promise<boolean>
   onSelectPost: () => void
 }
@@ -87,7 +86,7 @@ const PostItem = ({
           }
           color={userVoteValue === 1 ? 'brand.100' : 'gray.400'}
           fontSize={22}
-          onClick={onVote}
+          onClick={() => onVote(post, 1, post.communityId)}
           cursor='pointer'
         />
         <Text fontSize={'9pt'}>{post.voteStatus}</Text>
@@ -99,7 +98,7 @@ const PostItem = ({
           }
           color={userVoteValue === -1 ? '#4379ff' : 'gray.400'}
           fontSize={22}
-          onClick={onVote}
+          onClick={() => onVote(post, -1, post.communityId)}
           cursor='pointer'
         />
       </Flex>

@@ -22,9 +22,9 @@ const usePost = () => {
 
       const updatedPost = { ...post }
 
-      const updatedPosts = { ...postStateValue.posts }
+      const updatedPosts = [...postStateValue.posts]
 
-      let updatedPostVotes = { ...postStateValue.postVotes }
+      let updatedPostVotes = [...postStateValue.postVotes]
 
       let voteChange = vote
 
@@ -87,6 +87,12 @@ const usePost = () => {
       })
 
       await batch.commit()
+
+      const postIdx = postStateValue.posts.findIndex(
+        item => item.id === post.id
+      )
+
+      updatedPosts[postIdx] = updatedPost
 
       setPostStateValue(prev => ({
         ...prev,
